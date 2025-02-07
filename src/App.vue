@@ -1,17 +1,27 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <ChildComponent name="John" />
+
+  <nav>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav>
+  <h1>Count: {{ store.count }}</h1>
+  <button @click="store.increment">Increase</button>
+  <router-view />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import ChildComponent from "./components/ChildComponent.vue";
+import { useMainStore } from "./store/store";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  components: { ChildComponent },
+  setup() {
+    const store = useMainStore();
+    return { store };
   }
-}
+};
 </script>
 
 <style>
